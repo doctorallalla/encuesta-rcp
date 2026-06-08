@@ -1,0 +1,5 @@
+*.xlsx
+*.docx
+preview.png
+tools/
+google-apps-script/
