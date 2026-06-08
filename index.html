@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Encuesta sobre realización de RCP en la comunidad</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="ecgCanvas" aria-hidden="true"></canvas>
+
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Investigación académica anónima</p>
+        <h1>Encuesta sobre realización de RCP en la comunidad por estudiantes de medicina</h1>
+      </div>
+      <div class="status-pill" id="stepLabel">Pantalla 1 de 4</div>
+    </header>
+
+    <div class="progress" aria-hidden="true">
+      <span id="progressBar"></span>
+    </div>
+
+    <form id="surveyForm" novalidate>
+      <section class="screen active" data-screen="0" data-title="Datos demográficos">
+        <article class="intro-card">
+          <p>Estimado/a estudiante, se le invita a participar en esta investigación, diseñada por investigadores de la Universidad Nacional de La Matanza (UNLaM) y del Consejo de Emergencias de la Sociedad Argentina de Medicina (SAM), cuyo objetivo es describir las experiencias de estudiantes de medicina que han realizado RCP en situaciones reales fuera del ámbito educativo, asistencial o de simulación.</p>
+          <p>Esta encuesta está destinada a estudiantes de medicina que se encuentren cursando sus estudios de grado en cualquier año. Se encuentran excluidos de esta investigación puntual estudiantes de otras carreras, aunque sean del área de la salud; aquellas personas que hayan completado sus estudios de grado de medicina, es decir, quienes se hayan recibido, estén o no ejerciendo; y aquellas que todavía no hayan ingresado a la universidad para cursar sus estudios de grado de medicina. No deben completarla quienes se encuentren realizando cursos de ingreso o CBC.</p>
+          <p>Su participación es completamente voluntaria. Usted no tiene obligación de responder. Si no desea participar, cierre esta ventana.</p>
+          <p>El tiempo estimado para completar el cuestionario es de aproximadamente 10 minutos.</p>
+          <p>La participación es anónima y con fines exclusivamente académicos. Sus respuestas serán confidenciales y se utilizarán únicamente con fines de investigación. Puede retirarse en cualquier momento del cuestionario; simplemente cierre la ventana y no continúe.</p>
+          <p>El anonimato individual se encuentra protegido conforme a la Ley 25.326 de Protección de Datos Personales de la República Argentina. Los resultados del estudio serán analizados y presentados de manera agregada, sin posibilidad de identificar a las personas participantes. Agradecemos su tiempo y su colaboración en esta investigación.</p>
+          <p>Ante cualquier duda, puede contactar a los investigadores principales: Dra. Andrea Díaz, Dr. Adolfo Savia y Dr. Pascual Valdez, andreadiaz1930@gmail.com, adolfo.savia@gmail.com y rpascual46@gmail.com.</p>
+        </article>
+
+        <h2>Pantalla 1: Datos demográficos</h2>
+
+        <fieldset class="question">
+          <label for="q01_edad">1. Edad en años <span class="required">*</span></label>
+          <p class="hint">Acepta solo números de 17 a 99 años. En la base figura el número.</p>
+          <input id="q01_edad" name="q01_edad" type="number" min="17" max="99" inputmode="numeric" required>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>2. ¿Cuál es tu identidad de género? <span class="required">*</span></legend>
+          <p class="hint">Marca una sola opción.</p>
+          <div class="option-grid">
+            <label><input type="radio" name="q02_genero" value="1" required> Mujer cis</label>
+            <label><input type="radio" name="q02_genero" value="2"> Varón cis</label>
+            <label><input type="radio" name="q02_genero" value="3"> Mujer trans</label>
+            <label><input type="radio" name="q02_genero" value="4"> Varón trans</label>
+            <label><input type="radio" name="q02_genero" value="5"> No binario</label>
+            <label><input type="radio" name="q02_genero" value="6"> Otro</label>
+            <label><input type="radio" name="q02_genero" value="7"> Prefiero no responder</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <label for="q03_provincia">3. Provincia argentina de residencia <span class="required">*</span></label>
+          <p class="hint">En la base se exporta de 1 en adelante según la provincia.</p>
+          <select id="q03_provincia" name="q03_provincia" required>
+            <option value="">Seleccionar</option>
+            <option value="1">Provincia de Buenos Aires</option>
+            <option value="2">Ciudad Autónoma de Buenos Aires</option>
+            <option value="3">Catamarca</option>
+            <option value="4">Chaco</option>
+            <option value="5">Chubut</option>
+            <option value="6">Córdoba</option>
+            <option value="7">Corrientes</option>
+            <option value="8">Entre Ríos</option>
+            <option value="9">Formosa</option>
+            <option value="10">Jujuy</option>
+            <option value="11">La Pampa</option>
+            <option value="12">La Rioja</option>
+            <option value="13">Mendoza</option>
+            <option value="14">Misiones</option>
+            <option value="15">Neuquén</option>
+            <option value="16">Río Negro</option>
+            <option value="17">Salta</option>
+            <option value="18">San Juan</option>
+            <option value="19">San Luis</option>
+            <option value="20">Santa Cruz</option>
+            <option value="21">Santa Fe</option>
+            <option value="22">Santiago del Estero</option>
+            <option value="23">Tierra del Fuego</option>
+            <option value="24">Tucumán</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>4. Año de la carrera de Medicina que se encuentra cursando actualmente <span class="required">*</span></legend>
+          <p class="hint">Exporta número: 1°, 2°, etc.</p>
+          <div class="option-grid compact year-grid">
+            <label><input type="radio" name="q04_anio_carrera" value="1" required> 1°</label>
+            <label><input type="radio" name="q04_anio_carrera" value="2"> 2°</label>
+            <label><input type="radio" name="q04_anio_carrera" value="3"> 3°</label>
+            <label><input type="radio" name="q04_anio_carrera" value="4"> 4°</label>
+            <label><input type="radio" name="q04_anio_carrera" value="5"> 5°</label>
+            <label><input type="radio" name="q04_anio_carrera" value="6"> 6° / Internado Rotatorio / Práctica Final Obligatoria / Finalicé el cursado, pero aún me resta rendir materias.</label>
+          </div>
+        </fieldset>
+
+        <h2>Capacitación y realización de la RCP</h2>
+        <p class="section-note">Conteste las preguntas sobre su estado actual al momento de responder esta encuesta.</p>
+
+        <fieldset class="question">
+          <legend>5. ¿Ha recibido entrenamiento formal en RCP con actividades prácticas? <span class="required">*</span></legend>
+          <div class="option-grid compact">
+            <label><input type="radio" name="q05_entrenamiento_rcp" value="1" required> Sí</label>
+            <label><input type="radio" name="q05_entrenamiento_rcp" value="0"> No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>6. ¿Ha realizado RCP en una situación real como miembro de la comunidad? <span class="required">*</span></legend>
+          <p class="hint">No incluye prácticas asistenciales, simulaciones ni actividades laborales donde la realización de RCP forme parte de sus responsabilidades.</p>
+          <div class="option-grid compact">
+            <label><input type="radio" name="q06_realizo_rcp_comunidad" value="1" required> Sí</label>
+            <label><input type="radio" name="q06_realizo_rcp_comunidad" value="0"> No</label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" class="primary" data-next>Continuar</button>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="1" data-title="Datos sobre RCP">
+        <h2>Pantalla II: Datos sobre realización de la RCP</h2>
+
+        <fieldset class="question">
+          <legend>7. ¿Cuántas veces ha realizado RCP en la comunidad? <span class="required">*</span></legend>
+          <div class="option-grid compact">
+            <label><input type="radio" name="q07_cantidad_rcp" value="1" required> 1 vez</label>
+            <label><input type="radio" name="q07_cantidad_rcp" value="2"> &gt;1 vez</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>8. Edad aproximada de la persona a la que le practicó RCP <span class="required">*</span></legend>
+          <div class="option-grid">
+            <label><input type="radio" name="q08_edad_victima" value="1" required> Adulto (desde la pubertad en adelante).</label>
+            <label><input type="radio" name="q08_edad_victima" value="2"> Pediátrico (1 año hasta la pubertad)</label>
+            <label><input type="radio" name="q08_edad_victima" value="3"> Lactante (menor de 1 año)</label>
+            <label><input type="radio" name="q08_edad_victima" value="0"> No estoy seguro/no recuerdo</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>9. ¿Se activó el sistema de emergencias médicas (SEM) en ese evento? <span class="required">*</span></legend>
+          <div class="option-grid compact">
+            <label><input type="radio" name="q09_activo_sem" value="1" required> Sí</label>
+            <label><input type="radio" name="q09_activo_sem" value="0"> No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>10. ¿Utilizó un DEA durante la RCP? <span class="required">*</span></legend>
+          <div class="option-grid compact">
+            <label><input type="radio" name="q10_utilizo_dea" value="1" required> Sí</label>
+            <label><input type="radio" name="q10_utilizo_dea" value="0"> No</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question conditional" data-dea="no">
+          <legend>11. ¿Por qué motivo no utilizó DEA? <span class="required">*</span></legend>
+          <div class="option-grid">
+            <label><input type="radio" name="q11_motivo_no_dea" value="1"> Solicité el DEA, pero no fue obtenido</label>
+            <label><input type="radio" name="q11_motivo_no_dea" value="2"> No solicité el DEA</label>
+            <label><input type="radio" name="q11_motivo_no_dea" value="3"> No pude utilizarlo por falta de conocimiento o por un problema técnico.</label>
+            <label><input type="radio" name="q11_motivo_no_dea" value="0"> Otro</label>
+          </div>
+          <label class="subfield" for="q11_motivo_no_dea_otro">Si marcó “Otro”, especifique</label>
+          <input id="q11_motivo_no_dea_otro" name="q11_motivo_no_dea_otro" type="text" maxlength="250">
+        </fieldset>
+
+        <fieldset class="question conditional" data-dea="yes">
+          <legend>12. Si utilizó el DEA, ¿cuál fue el resultado del análisis de ritmo? <span class="required">*</span></legend>
+          <div class="option-grid">
+            <label><input type="radio" name="q12_resultado_dea" value="1"> Indicó una o más descargas.</label>
+            <label><input type="radio" name="q12_resultado_dea" value="0"> No indicó descargas.</label>
+            <label><input type="radio" name="q12_resultado_dea" value="2"> No recuerdo</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>13. Duración aproximada de la reanimación que realicé (el total de mi participación) <span class="required">*</span></legend>
+          <p class="hint">En caso de haber reanimado más de una vez, completar con la más larga.</p>
+          <div class="option-grid">
+            <label><input type="radio" name="q13_duracion_rcp" value="1" required> &lt;5 minutos.</label>
+            <label><input type="radio" name="q13_duracion_rcp" value="2"> 5-10 minutos.</label>
+            <label><input type="radio" name="q13_duracion_rcp" value="3"> 11 a 20 minutos</label>
+            <label><input type="radio" name="q13_duracion_rcp" value="4"> &gt;20 minutos</label>
+            <label><input type="radio" name="q13_duracion_rcp" value="5"> No estoy seguro / no recuerdo</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>14. ¿Se obtuvo retorno de la circulación espontánea (RCE)? <span class="required">*</span></legend>
+          <div class="option-grid">
+            <label><input type="radio" name="q14_rce" value="1" required> Sí</label>
+            <label><input type="radio" name="q14_rce" value="0"> No</label>
+            <label><input type="radio" name="q14_rce" value="2"> No lo sé / no lo recuerdo.</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="question" data-checkbox-group="q15_finalizacion">
+          <legend>15. ¿Cómo finalizó la RCP? <span class="required">*</span></legend>
+          <p class="hint">Se aceptan varias respuestas, pero intente marcar una sola, la más definitiva.</p>
+          <div class="option-grid">
+            <label><input type="checkbox" name="q15_finalizacion" value="arribo_sem"> Arribó el SEM y asumió la atención.</label>
+            <label><input type="checkbox" name="q15_finalizacion" value="rce"> Retorno de la circulación espontánea.</label>
+            <label><input type="checkbox" name="q15_finalizacion" value="exhausto"> Agotamiento físico: no pude continuar.</label>
+            <label><input type="checkbox" name="q15_finalizacion" value="escena_insegura"> La escena se volvió insegura.</label>
+            <label><input type="checkbox" name="q15_finalizacion" value="suspension_sin_rce"> Se suspendió la RCP sin retorno de la circulación espontánea.</label>
+            <label><input type="checkbox" name="q15_finalizacion" value="otra"> Otra</label>
+          </div>
+          <label class="subfield" for="q15_finalizacion_otro_texto">Si marcó “Otra”, especifique</label>
+          <input id="q15_finalizacion_otro_texto" name="q15_finalizacion_otro_texto" type="text" maxlength="250">
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" class="secondary" data-prev>Volver</button>
+          <button type="button" class="primary" data-next>Continuar</button>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="2" data-title="Impacto emocional">
+        <h2>Impacto emocional posterior a la RCP</h2>
+        <p class="section-note">Indique su grado de acuerdo con las siguientes afirmaciones: 1 = totalmente en desacuerdo; 5 = totalmente de acuerdo.</p>
+
+        <fieldset class="question likert">
+          <legend>16. Después de realizar la RCP, me sentí satisfecho por haber intentado ayudar. <span class="required">*</span></legend>
+          <div class="scale" data-name="q16_satisfaccion_ayudar"></div>
+        </fieldset>
+
+        <fieldset class="question likert">
+          <legend>17. Después de realizar la RCP, me sentí emocionalmente afectado por la situación. <span class="required">*</span></legend>
+          <div class="scale" data-name="q17_afectado_emocionalmente"></div>
+        </fieldset>
+
+        <fieldset class="question likert">
+          <legend>18. Después de realizar la RCP, me sentí triste o deprimido. <span class="required">*</span></legend>
+          <div class="scale" data-name="q18_triste_deprimido"></div>
+        </fieldset>
+
+        <fieldset class="question likert">
+          <legend>19. Después de realizar la RCP, experimenté ansiedad o preocupación posterior al evento. <span class="required">*</span></legend>
+          <div class="scale" data-name="q19_ansiedad_preocupacion"></div>
+        </fieldset>
+
+        <fieldset class="question likert">
+          <legend>20. Después de realizar la RCP, volvería a realizar RCP si me encontrara en una situación similar. <span class="required">*</span></legend>
+          <div class="scale" data-name="q20_volveria_realizar_rcp"></div>
+        </fieldset>
+
+        <fieldset class="question">
+          <legend>21. La experiencia real de RCP modificó su interés en seguir capacitándose en emergencias <span class="required">*</span></legend>
+          <div class="option-grid">
+            <label><input type="radio" name="q21_interes_capacitacion" value="1" required> Aumentó mi interés</label>
+            <label><input type="radio" name="q21_interes_capacitacion" value="2"> Disminuyó mi interés</label>
+            <label><input type="radio" name="q21_interes_capacitacion" value="0"> No se modificó.</label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" class="secondary" data-prev>Volver</button>
+          <button type="button" class="primary" data-next>Continuar</button>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="3" data-title="Preguntas finales">
+        <h2>Pantalla III: Preguntas finales</h2>
+        <p class="section-note">1 = totalmente en desacuerdo; 5 = totalmente de acuerdo.</p>
+
+        <fieldset class="question likert">
+          <legend>22. ¿Siente confianza para realizar RCP en la vida real? <span class="required">*</span></legend>
+          <div class="scale" data-name="q22_confianza_rcp"></div>
+        </fieldset>
+
+        <fieldset class="question likert">
+          <legend>23. ¿Percibe que existe disponibilidad de DEA de acceso público en la comunidad donde se desenvuelve habitualmente? <span class="required">*</span></legend>
+          <div class="scale" data-name="q23_disponibilidad_dea"></div>
+        </fieldset>
+
+        <article class="intro-card final-message">
+          <p>Agradecemos su participación en esta encuesta. Por favor, comparta este formulario con sus compañeros estudiantes de medicina. Ante cualquier duda, puede contactar a los investigadores principales: Dra. Andrea Díaz, Dr. Adolfo Savia y Dr. Pascual Valdez, andreadiaz1930@gmail.com, adolfo.savia@gmail.com y rpascual46@gmail.com.</p>
+        </article>
+
+        <div class="submit-state" id="submitState" role="status" aria-live="polite"></div>
+
+        <div class="actions">
+          <button type="button" class="secondary" data-prev>Volver</button>
+          <button type="submit" class="primary">Enviar encuesta</button>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <div class="success-modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successTitle" hidden>
+    <div class="success-card">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h2 id="successTitle">Encuesta enviada con éxito</h2>
+      <p>Muchas gracias por participar. Su respuesta fue registrada correctamente.</p>
+      <button type="button" class="primary" id="successClose">Finalizar</button>
+    </div>
+  </div>
+
+  <iframe name="submitFrame" id="submitFrame" title="Envío de encuesta" hidden></iframe>
+  <script src="app.js"></script>
+</body>
+</html>
