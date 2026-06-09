@@ -63,7 +63,7 @@ const RCP_ONLY_FIELDS = [
   "q21_interes_capacitacion"
 ];
 
-const CHECKBOX_MAP = {
+const FINALIZATION_MAP = {
   arribo_sem: "q15_finalizacion_arribo_sem",
   rce: "q15_finalizacion_rce",
   exhausto: "q15_finalizacion_exhausto",
@@ -237,12 +237,12 @@ function validateCurrentScreen() {
     }
   }
 
-  const checkboxGroup = screen.querySelector("[data-checkbox-group='q15_finalizacion']");
-  if (checkboxGroup) {
-    const checked = checkboxGroup.querySelectorAll("input[type='checkbox']:checked").length;
-    checkboxGroup.classList.toggle("invalid-group", checked === 0);
-    if (checked === 0) {
-      checkboxGroup.scrollIntoView({ behavior: "smooth", block: "center" });
+  const radioGroup = screen.querySelector("[data-radio-group='q15_finalizacion']");
+  if (radioGroup) {
+    const checked = radioGroup.querySelectorAll("input[type='radio']:checked").length;
+    radioGroup.classList.toggle("invalid-group", checked !== 1);
+    if (checked !== 1) {
+      radioGroup.scrollIntoView({ behavior: "smooth", block: "center" });
       return false;
     }
   }
@@ -283,12 +283,12 @@ function collectPayload() {
   payload.q11_motivo_no_dea_otro = document.getElementById("q11_motivo_no_dea_otro").value.trim();
   payload.q15_finalizacion_otro_texto = document.getElementById("q15_finalizacion_otro_texto").value.trim();
 
-  Object.values(CHECKBOX_MAP).forEach((field) => {
+  Object.values(FINALIZATION_MAP).forEach((field) => {
     payload[field] = "0";
   });
 
   document.querySelectorAll("input[name='q15_finalizacion']:checked").forEach((input) => {
-    payload[CHECKBOX_MAP[input.value]] = "1";
+    payload[FINALIZATION_MAP[input.value]] = "1";
   });
 
   normalizeBranchValues(payload);
