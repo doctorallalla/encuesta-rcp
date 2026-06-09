@@ -1,5 +1,5 @@
 const CONFIG = {
-  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbzhS-W4DoqS8Cu0eHW3ZScEhLnLuPxVNzS_ECrl0OJTJmOBO-nJcMEcJOKoiClzZraLRA/exec"
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbyXW1IFMxof4aVeGEdZDW2kmchrAQzTBXzLQJClOax69So6mfMzUwNTMnk4WWWGPDVu/exec"
 };
 
 const FORM_FIELDS = [

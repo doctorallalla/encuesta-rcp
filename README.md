@@ -26,7 +26,7 @@ Este proyecto contiene un formulario web en HTML/CSS/JavaScript vanilla y un bac
 
 La URL actual configurada en `app.js` es:
 
-`https://script.google.com/macros/s/AKfycbzhS-W4DoqS8Cu0eHW3ZScEhLnLuPxVNzS_ECrl0OJTJmOBO-nJcMEcJOKoiClzZraLRA/exec`
+`https://script.google.com/macros/s/AKfycbyXW1IFMxof4aVeGEdZDW2kmchrAQzTBXzLQJClOax69So6mfMzUwNTMnk4WWWGPDVu/exec`
 
 Si se crea una nueva implementacion en Apps Script, reemplazar esa URL en `app.js`.
 
