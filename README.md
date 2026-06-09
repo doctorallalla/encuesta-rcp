@@ -57,7 +57,7 @@ Las filas de prueba quedan marcadas con `user_agent` que empieza con `Codex synt
 - Si `q06_realizo_rcp_comunidad = 0`, todas las columnas desde `q07` hasta `q21` se guardan como `NA`.
 - Si `q10_utilizo_dea = 1`, `q11_motivo_no_dea` y `q11_motivo_no_dea_otro` se guardan como `NA`.
 - Si `q10_utilizo_dea = 0`, `q12_resultado_dea` se guarda como `NA`.
-- La pregunta 15 se guarda en columnas binarias separadas para facilitar estadistica posterior.
+- La pregunta 15 se guarda en la columna principal `q15_finalizacion_rcp`: 0 otra, 1 arribo del SEM, 2 RCE, 3 agotamiento fisico, 4 escena insegura, 5 suspension sin RCE, `NA` si no corresponde.
 
 ## Opciones gratuitas de alojamiento
 

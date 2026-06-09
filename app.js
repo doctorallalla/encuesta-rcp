@@ -21,6 +21,7 @@ const FORM_FIELDS = [
   "q12_resultado_dea",
   "q13_duracion_rcp",
   "q14_rce",
+  "q15_finalizacion_rcp",
   "q15_finalizacion_arribo_sem",
   "q15_finalizacion_rce",
   "q15_finalizacion_exhausto",
@@ -48,6 +49,7 @@ const RCP_ONLY_FIELDS = [
   "q12_resultado_dea",
   "q13_duracion_rcp",
   "q14_rce",
+  "q15_finalizacion_rcp",
   "q15_finalizacion_arribo_sem",
   "q15_finalizacion_rce",
   "q15_finalizacion_exhausto",
@@ -64,12 +66,12 @@ const RCP_ONLY_FIELDS = [
 ];
 
 const FINALIZATION_MAP = {
-  arribo_sem: "q15_finalizacion_arribo_sem",
-  rce: "q15_finalizacion_rce",
-  exhausto: "q15_finalizacion_exhausto",
-  escena_insegura: "q15_finalizacion_escena_insegura",
-  suspension_sin_rce: "q15_finalizacion_suspension_sin_rce",
-  otra: "q15_finalizacion_otra"
+  1: "q15_finalizacion_arribo_sem",
+  2: "q15_finalizacion_rce",
+  3: "q15_finalizacion_exhausto",
+  4: "q15_finalizacion_escena_insegura",
+  5: "q15_finalizacion_suspension_sin_rce",
+  0: "q15_finalizacion_otra"
 };
 
 const startTime = Date.now();
@@ -156,7 +158,7 @@ function wireConditionalInputs() {
     input.addEventListener("change", updateOtherRequirements);
   });
 
-  document.querySelectorAll("input[name='q15_finalizacion']").forEach((input) => {
+  document.querySelectorAll("input[name='q15_finalizacion_rcp']").forEach((input) => {
     input.addEventListener("change", updateOtherRequirements);
   });
 }
@@ -220,8 +222,7 @@ function updateOtherRequirements() {
   const q11Other = getRadioValue("q11_motivo_no_dea") === "0";
   document.getElementById("q11_motivo_no_dea_otro").required = q11Other;
 
-  const q15Other = Array.from(document.querySelectorAll("input[name='q15_finalizacion']:checked"))
-    .some((input) => input.value === "otra");
+  const q15Other = getRadioValue("q15_finalizacion_rcp") === "0";
   document.getElementById("q15_finalizacion_otro_texto").required = q15Other;
 }
 
@@ -237,7 +238,7 @@ function validateCurrentScreen() {
     }
   }
 
-  const radioGroup = screen.querySelector("[data-radio-group='q15_finalizacion']");
+  const radioGroup = screen.querySelector("[data-radio-group='q15_finalizacion_rcp']");
   if (radioGroup) {
     const checked = radioGroup.querySelectorAll("input[type='radio']:checked").length;
     radioGroup.classList.toggle("invalid-group", checked !== 1);
@@ -269,6 +270,7 @@ function collectPayload() {
   setFromRadio(payload, "q12_resultado_dea");
   setFromRadio(payload, "q13_duracion_rcp");
   setFromRadio(payload, "q14_rce");
+  setFromRadio(payload, "q15_finalizacion_rcp");
   setFromRadio(payload, "q16_satisfaccion_ayudar");
   setFromRadio(payload, "q17_afectado_emocionalmente");
   setFromRadio(payload, "q18_triste_deprimido");
@@ -287,9 +289,9 @@ function collectPayload() {
     payload[field] = "0";
   });
 
-  document.querySelectorAll("input[name='q15_finalizacion']:checked").forEach((input) => {
-    payload[FINALIZATION_MAP[input.value]] = "1";
-  });
+  if (payload.q15_finalizacion_rcp !== "") {
+    payload[FINALIZATION_MAP[payload.q15_finalizacion_rcp]] = "1";
+  }
 
   normalizeBranchValues(payload);
   return payload;
@@ -312,7 +314,7 @@ function normalizeBranchValues(payload) {
     payload.q12_resultado_dea = "NA";
   }
 
-  if (payload.q15_finalizacion_otra !== "1") {
+  if (payload.q15_finalizacion_rcp !== "0") {
     payload.q15_finalizacion_otro_texto = "";
   }
 
@@ -408,7 +410,7 @@ function clearRcpOnlyAnswers() {
     }
   });
 
-  document.querySelectorAll("input[name='q15_finalizacion']").forEach((input) => {
+  document.querySelectorAll("input[name='q15_finalizacion_rcp']").forEach((input) => {
     input.checked = false;
   });
   updateDeaBranch();
